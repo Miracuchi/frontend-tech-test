@@ -1,11 +1,14 @@
 export const DEFAULT_LANGUAGE = 'fr';
 export const DEFAULT_LOCALE = 'fr-FR';
 
-export const ACCOUNT_KEY = {
-  development: 'r1x-ei_zq',
-  staging: 'r1x-ei_zq',
-  production: 'r1x-ei_zq',
-}[process.env.APP_ENV];
+// Todo: make it work for windows
+// export const ACCOUNT_KEY = {
+//   development: 'r1x-ei_zq',
+//   staging: 'r1x-ei_zq',
+//   production: 'r1x-ei_zq',
+// }[process.env.APP_ENV];
+
+export const ACCOUNT_KEY = 'r1x-ei_zq';
 
 export const KENTICO_HARDCODED_PAGES = {
   HOME: 'tech_test',

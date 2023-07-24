@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { AppProps } from 'next/app';
@@ -5,8 +6,6 @@ import { DefaultSeo } from 'next-seo';
 import NextNProgress from 'nextjs-progressbar';
 
 import { ViewportProvider } from '@onrewind/ui';
-
-import '../styles.css';
 
 import Layout from '$components/layout';
 
@@ -19,9 +18,10 @@ const queryClient = new QueryClient({
 });
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const webConfig = pageProps.webConfig;
 
-  console.log('webConfig', webConfig);
+  console.log('la valeur de pageprops', pageProps, 'components', Component);
 
   return (
     <>
@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
       <QueryClientProvider client={queryClient}>
         <ViewportProvider>
           <NextNProgress color="var(--secondary)" />
-          <Layout>
+          <Layout config={webConfig}>
             <Component {...pageProps} />
           </Layout>
         </ViewportProvider>
