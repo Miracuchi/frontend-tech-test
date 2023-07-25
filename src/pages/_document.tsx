@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 
 import { DEFAULT_LANGUAGE, DEFAULT_LOCALE } from '$utils/constants';
@@ -33,7 +32,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body className="bg-background">
+        <body className="bg-gray-950">
           <Main />
           <NextScript />
         </body>

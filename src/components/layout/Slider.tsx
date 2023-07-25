@@ -1,7 +1,3 @@
-/* eslint-disable no-constant-condition */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-console */
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +8,8 @@ import {
   OriginsVideoCard,
   SlideSection,
 } from '@origins-digital/types/ott';
+
+import { Button } from '@onrewind/ui';
 
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
@@ -31,7 +29,14 @@ function renderItems(items: (OriginsVideoCard | OriginsEventCard | Image)[] | an
           | null
           | undefined;
         poster: any;
-        thumbnail: any;
+        thumbnail: | string
+        | number
+        | boolean
+        | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+        | Iterable<React.ReactNode>
+        | React.ReactPortal
+        | null
+        | undefined;
       },
       index: React.Key | null | undefined,
     ) => {
@@ -52,16 +57,23 @@ function renderItems(items: (OriginsVideoCard | OriginsEventCard | Image)[] | an
 
       return (
         <div key={index}>
-          {'name' in item && <p>{item.name}</p>}
-          {'description' in item && <p>{item.description}</p>}
-          <img src={item.poster || item.thumbnail} alt={item.name} />
-          {buttonLabel && (
-            <button>
-              {buttonLabel}
-              <FontAwesomeIcon icon={faCirclePlay} />
-            </button>
-          )}
-          <div></div>
+          <img
+            src={item.poster || item.thumbnail}
+            alt={item.name}
+            className="filter brightness-50 grayscale-100 h-screen"
+          />
+          <div className="absolute top-0 left-10 w-96 h-full flex flex-col justify-center">
+            {'description' in item && <p className="text-white text-left">{item.description}</p>}
+            {'name' in item && (
+              <p className="text-white font-medium text-left text-4xl">{item.name}</p>
+            )}
+            {buttonLabel && (
+              <Button className="bg-orange-400 text-white text-sm mt-1 w-36 rounded whitespace-nowrap">
+                {buttonLabel}
+                <FontAwesomeIcon icon={faCirclePlay} className="text-blue-200 m-2 text-2xl" />
+              </Button>
+            )}
+          </div>
         </div>
       );
     },
@@ -72,7 +84,7 @@ function Slider({ items }: SlideSection): JSX.Element {
   const carouselItems = renderItems(items);
 
   return (
-    <Carousel infiniteLoop={true} showThumbs={false}>
+    <Carousel infiniteLoop={true} showThumbs={false} showStatus={false}>
       {carouselItems}
     </Carousel>
   );

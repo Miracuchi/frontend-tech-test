@@ -1,5 +1,3 @@
-/* eslint-disable no-constant-condition */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
@@ -28,6 +26,7 @@ function renderItems(items: (OriginsVideoCard | OriginsPlaylistCard)[] | any) {
           | undefined;
         poster: any;
         thumbnail: any;
+        duration: string;
       },
       index: React.Key | undefined,
     ) => {
@@ -47,17 +46,21 @@ function renderItems(items: (OriginsVideoCard | OriginsPlaylistCard)[] | any) {
       }
 
       return (
-        <div key={index}>
-          {'name' in item && <p>{item.name}</p>}
-          {'description' in item && <p>{item.description}</p>}
-          <img src={item.poster || item.thumbnail} alt={item.name} />
+        <div key={index} className="relative my-10 mx-1">
+          <img src={item.poster || item.thumbnail} alt={item.name} className="h-64 rounded-lg" />
+          <div className="absolute bottom-0 left-0 w-full h-2 bg-blue-500 rounded-b-full"></div>
+          <div className="flex justify-between px-4 absolute top-56 left-0 w-full">
+            {'name' in item && <p className="text-white font-medium">{item.name}</p>}
+            {'duration' in item && <p className="text-white">{item.duration}</p>}
+          </div>
           {buttonLabel && (
-            <button>
-              {buttonLabel}
-              <FontAwesomeIcon icon={faCirclePlay} />
-            </button>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <button>
+                {/* {buttonLabel} */}
+                <FontAwesomeIcon icon={faCirclePlay} className="text-white text-5xl" />
+              </button>
+            </div>
           )}
-          <div></div>
         </div>
       );
     },
@@ -73,10 +76,11 @@ function ImageCarousel({ items }: CarouselSectionDTO): JSX.Element {
       infiniteLoop={true}
       showThumbs={false}
       dynamicHeight={false}
-      emulateTouch={true}
-      centerMode={window.innerWidth >= 768}
-      centerSlidePercentage={window.innerWidth >= 768 ? 33.3333 : 100}
+      // emulateTouch={true}
+      centerMode={true}
+      centerSlidePercentage={window.innerWidth >= 768 ? 30 : 100}
       swipeScrollTolerance={window.innerWidth >= 768 ? 5 : 1}
+      showIndicators={false}
     >
       {carouselItems}
     </Carousel>
