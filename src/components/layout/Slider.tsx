@@ -1,3 +1,5 @@
+/* eslint-disable no-constant-condition */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
@@ -29,14 +31,15 @@ function renderItems(items: (OriginsVideoCard | OriginsEventCard | Image)[] | an
           | null
           | undefined;
         poster: any;
-        thumbnail: | string
-        | number
-        | boolean
-        | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-        | Iterable<React.ReactNode>
-        | React.ReactPortal
-        | null
-        | undefined;
+        thumbnail:
+          | string
+          | number
+          | boolean
+          | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+          | Iterable<React.ReactNode>
+          | React.ReactPortal
+          | null
+          | undefined;
       },
       index: React.Key | null | undefined,
     ) => {

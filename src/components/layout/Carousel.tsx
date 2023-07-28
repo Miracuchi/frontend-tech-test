@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-constant-condition */
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
